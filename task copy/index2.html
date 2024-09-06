@@ -1,0 +1,120 @@
+<html> 
+    
+<head>
+
+    <title>Arsilan Hussain - Task - ITCareerSwitch</title>
+   
+    <link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+
+<body>
+    <table> 
+       
+        <tr>
+            <th>API Name</th>
+            <th>API Description</th>
+            <th></th>
+          </tr>
+         
+       <!--First API Param Options-->
+          <tr>
+            <td>1.Country Capital</td>
+            <td align="middle">
+
+                <select id="selCountry">
+                    <option value="GB">Great Britain</option>
+                    <option value="FR">France</option>
+                    <option value="DE">Germany</option>
+                    <option value="US">USA</option>
+                    <option value="ES">Spain</option>
+                 
+                </select>
+
+                <select id="selLanguage">
+                    <option value="en">English</option>
+                    <option value="fr">Francais</option>
+                    <option value="esp">Spanish</option>
+                    <option value="ar">Arabic</option>
+            
+                </select>
+            </td>
+            
+            <td><button id="btnRun">Submit</button></td>
+          </tr>
+       
+       
+          <tr>
+             <!--Second API Param Options-->
+            <td>2.Ocean Coordinates</td>
+            <td align="middle"><select id="latitudeOne">
+                <option value="40.78343">40.78343</option>
+                <option value="-40.0000">-40.0000</option>
+                <option value="26.95235">26.95235</option>
+                 </select>
+
+                <select id="longitudeOne">
+                <option value="-43.96625">-43.96625</option>
+                <option value="1.0000">1.0000</option>
+                <option value="-169.38414">-169.38414</option>
+                </select></td>
+            <td><button id="btnTwoRun">Submit</button></td>
+  
+        </tr>
+        <tr>
+            <!--Third API Param Options-->
+            <td>3.Country Weather Temp</td>
+            <td align="middle">
+                <select id="latitudeTwo">
+                    <option value="51">51 (United Kingdom)</option>
+                    <option value="52.3">52.3 (Germany)</option>
+                    <option value="48.5">48.5 (France)</option>
+                </select>
+
+                <select id="longitudeTwo">
+                    <option value="0.5">0.5 (United Kingdom)</option>
+                    <option value="13">13 (Germany)</option>
+                    <option value="2">2 (France)</option>
+                </select>
+            </td>
+            <td><button id="btnThreeRun">Submit</button></td>
+
+        </tr>
+         <!--Results-->
+            <td>
+                <td colspan="2" align="middle">Results</td>
+            </td>
+            <tr>
+                 <!--First API Results-->
+                <td align="middle">
+                    1.Capital: 
+                </td>
+                <td colspan="2" align= "middle" id="txtCapital"> 
+                </td>
+
+            </tr>
+            <tr>
+                 <!--Second API Results-->
+                <td align="middle">
+                    2. Ocean Name: 
+                </td>
+                <td colspan="2" align= "middle" id="txtName"> 
+                </td>
+            </tr>
+            <tr>
+                 <!--Third API Results-->
+            <td align="middle">
+                3.Country Temperature 
+            </td>
+            <td colspan="2" align= "middle" id="txtTemperature">               
+            </td>
+         </tr>
+    </tr>
+    </table>
+<script src="/task/jquery.js"></script>
+<script src="/task/script3.js"></script>
+<script src="/task/script2.js"></script>
+<script src="/task/script.js"></script>
+</body>
+
+</html>
+
