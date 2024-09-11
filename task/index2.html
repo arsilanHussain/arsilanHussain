@@ -1,0 +1,93 @@
+<html> 
+    
+<head>
+
+    <title>Arsilan Hussain - Task - ITCareerSwitch</title>
+   
+    <link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+
+<body>
+    <table> 
+       
+        <tr>
+            <th>API Name</th>
+            <th>API Description</th>
+            <th></th>
+          </tr>
+         
+       <!--First API Param Options-->
+          <tr>
+            <td>1.Country Time</td>           
+                <td align="middle">
+                    <label for="latitude">latitude</label>
+                    <input type="number" id="latitude" name="latitude">
+                    <label for="longitude">longitude</label>
+                    <input type="number" id="longitude" name="longitude">
+                </td>
+            <td><button id="btnRun">Submit</button></td>
+          </tr>
+       
+       
+          <tr>
+             <!--Second API Param Options-->
+            <td>2.Ocean Coordinates</td>
+            <td align="middle">
+                <label for="latitude">latitude</label>
+                <input type="number" id="latitudeOne" name="latitudeOne">
+                <label for="longitude">longitude</label>
+                <input type="number" id="longitudeOne" name="longitudeOne">
+            </td>
+            <td><button id="btnTwoRun">Submit</button></td>
+  
+        </tr>
+        <tr>
+            <!--Third API Param Options-->
+            <td>3.Country Weather Temp</td>
+                <td align="middle">
+                    <label for="latitude">latitude</label>
+                    <input type="number" id="latitudeTwo" name="latitudeTwo">
+                    <label for="longitude">longitude</label>
+                    <input type="number" id="longitudeTwo" name="longitudeTwo">
+                </td>
+                
+            <td><button id="btnThreeRun">Submit</button></td>
+
+        </tr>
+         <!--Results-->
+            <td>
+                <td colspan="2" align="middle">Results</td>
+            </td>
+            <tr>
+                 <!--First API Results-->
+                <td align="middle">
+                    1.Time: 
+                </td>
+                <td colspan="2" align= "middle" id="txtTime"> 
+                </td>
+
+            </tr>
+            <tr>
+                 <!--Second API Results-->
+                <td align="middle">
+                    2. Ocean Name: 
+                </td>
+                <td colspan="2" align= "middle" id="txtName"> 
+                </td>
+            </tr>
+            <tr>
+                 <!--Third API Results-->
+            <td align="middle">
+                3.Country Temperature 
+            </td>
+            <td colspan="2" align= "middle" id="txtTemperature">               
+            </td>
+         </tr>
+    </tr>
+    </table>
+<script src="/task/jquery.js"></script>
+<script src="/task/script.js"></script>
+</body>
+
+</html>
+
