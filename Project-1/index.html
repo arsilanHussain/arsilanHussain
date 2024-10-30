@@ -1,0 +1,150 @@
+<html>
+<head>
+    <!-- Scripts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/project1/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome CSS (for button icons) -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+    <!-- EasyButton CSS -->
+    <link rel="stylesheet" href="node_modules/leaflet-easybutton/src/easy-button.css">
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/project1/favicon.ico">
+    <!-- Scripts -->
+
+</head>
+<body>
+
+    <!-- Dropdown country select -->    
+    <span id="selectContainer">
+        <select id="countrySelect" class="form-select shadow-sm" >
+            <option>Select Country...</option>
+        </select>
+    </span>
+    <!-- End of dropdown country select-->
+
+    <!-- PreLoader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- End of PreLoader -->
+
+    <!-- Map -->
+    <div id="map"></div>
+    <!-- End of map -->
+
+    <!-- Modal 1 - (Country Information) -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Country Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="country-info"></div>
+            </div>
+        </div>
+    </div>
+    <!--- End of modal 1 -->
+
+    <!-- Modal 2 - (Wikipedia Link) -->
+    <div class="modal fade" id="wikiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Wikipedia Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="wikiModalContent"></div>
+            </div>
+        </div>
+    </div>
+    <!--- End of modal 2 -->
+
+  <!-- Modal 3 - (Currency Converter) -->
+  <div class="modal fade" id="currencyModal" tabindex="-1" aria-labelledby="currencyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="currencyModalLabel">Currency Converter</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div>
+                  <label for="amount">Amount:</label>
+                  <input type="number" id="amount" class="form-control" placeholder="Enter amount to convert">
+              </div>
+              <div class="mt-3">
+                  <label for="targetCurrency">Convert to:</label>
+                  <select id="targetCurrency" class="form-select">
+                  </select>
+              </div>
+              <div class="mt-3">
+                  <button id="convertCurrency" class="btn btn-primary">Convert</button>
+              </div>
+              <div id="currencyInfo" class="mt-3"></div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Modal 3 -->
+
+
+    <!-- Modal 4 - (Weather) -->
+    <div class="modal fade" id="weatherModal" tabindex="-1" aria-labelledby="weatherModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="weatherModalLabel">Weather Forecast In The Countries Capital</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="weatherInfo"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal 4 -->
+
+    <!-- Modal 5 - (News) -->
+    <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsModalLabel">Latest News</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="newsContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal 5 -->
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Bundle (includes Popper) -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="node_modules/leaflet/dist/leaflet.js"></script>
+    <!-- Leaflet EasyButton JS (must be after Leaflet JS) -->
+    <script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
+    <!-- Leaflet MarkerCluster JS -->
+    <script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <!-- Turf.js -->
+    <script src="node_modules/@turf/turf/turf.min.js"></script>
+    <script type="application/javascript" src="/project1/script.js"></script>
+    <!-- Scripts -->
+</body>
+</html>
