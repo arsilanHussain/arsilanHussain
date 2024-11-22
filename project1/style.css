@@ -1,0 +1,180 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#selectContainer {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 11px 0;
+}
+
+#countrySelect {
+  width: 200px;
+  margin: 0 auto;
+}
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #fff;
+  }
+  
+  #preloader:before {
+  content: "";
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border: 6px solid #f2f2f2;
+  border-top: 6px solid #56829e ;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 1s linear infinite;  
+  }      @-webkit-keyframes animate-preloader {
+  0% {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  }
+  100% {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+  }
+  }
+  @keyframes animate-preloader {
+  0% {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  }
+  100% {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+  }
+  }
+
+  .leaflet-bar .easy-button-button {
+  align-items: center;                
+  justify-content: center;            
+  padding: 5;                         
+  width: 40px;                      
+  height: 40px;                      
+  border-radius: 50%;                
+  background-color: #ffffff;         
+  font-size: large;
+  cursor: pointer;                   
+  transition: background-color 0.3s;
+  }
+  .leaflet-bar .easy-button-button i {
+  font-size: large;                   
+  color: #000000;                        
+  }
+  .leaflet-bar .easy-button-button:hover {
+  background-color: #757575;          
+  }
+  .leaflet-bar .easy-button-button:active {
+  background-color: #696969;             
+  }
+
+  .custom-marker-icon {
+  background-color: white;        
+  border-radius: 50%;             
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 15px;
+  color: black;                    
+  border: 2px solid black;         
+  }
+  .city-marker-icon::before {
+  content: "\f64f"; 
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  }
+  .nature-marker-icon::before {
+  content: "\f6fc"; 
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  }
+  .leaflet-marker-icon:hover {
+  filter: brightness(0.7);
+  }
+
+  .airport-marker-icon::before {
+  content: "\f072"; 
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: black; 
+  font-size: 15px;
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  }
+
+.modal-header {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+  background-color: white;
+}
+
+.btn-outline-primary:hover {
+  color: white;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.news-table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: separate;
+}
+
+.news-image {
+  width: 30%;
+  padding-right: 10px;
+  vertical-align: top;
+}
+
+.news-title {
+  vertical-align: middle;
+}
+
+.news-img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.news-link {
+  font-weight: bold;
+  font-size: 1rem;
+  color: black; 
+  text-decoration: underline; 
+}
+
+.news-link:hover {
+  text-decoration: none; 
+}

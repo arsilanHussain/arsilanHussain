@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gazetteer</title>
+  <!-- Bootstrap CSS -->
+   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+  <!-- Leaflet MarkerCluster CSS -->
+  <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
+  <!-- EasyButton CSS -->
+  <link rel="stylesheet" href="node_modules/leaflet-easybutton/src/easy-button.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="/project1/style.css">
+<body>
+   
+<!-- Dropdown country select -->    
+<span id="selectContainer">
+<select id="countrySelect" class="form-select shadow-sm" >
+<option>Select Country...</option>
+</select>
+</span>
+<!-- End of dropdown country select-->
+
+<!-- PreLoader -->
+<div id="preloader">
+<div class="loader"></div>
+</div>
+<!-- End of PreLoader -->
+
+<!-- Map -->
+<div id="map"></div>
+<!--End of map-->
+
+<!-- Modal 1 - (Country Information) -->
+<div id="countryInfoModal" class="modal" data-bs-backdrop="false" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="fa-solid fa-circle-info fa-xl me-2"></i>Country Information</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-white text-black">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td class="text-center col-2">
+                <i class="fa-solid fa-landmark-flag fa-xl text-black"></i>
+              </td>
+              <td>Country</td>
+              <td id="countryName" class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">
+                <i class="fa-solid fa-globe fa-xl text-black"></i>
+              </td>
+              <td>Capital City</td>
+              <td id="capitalCity" class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">
+                <i class="fa-solid fa-person fa-xl text-black"></i>
+              </td>
+              <td>Population</td>
+              <td id="population" class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">
+                <i class="fa-solid fa-ruler-combined fa-xl text-black"></i>
+              </td>
+              <td>Area (km<sup>2</sup>)</td>
+              <td id="area" class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">
+                <i class="fa-solid fa-coins fa-xl text-black"></i>
+              </td>
+              <td>Currency</td>
+              <td id="currency" class="text-end"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer bg-white text-black">
+        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--- End of modal 1 -->
+
+<!-- Modal 2 - (Wikipedia Link) -->
+<div class="modal fade" id="wikiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Wikipedia Information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="wikiModalContent">
+          </div>
+      </div>
+  </div>
+</div>
+<!--- End of modal 2 -->
+
+<!---Modal 3 - (Currency Converter) -->
+<div id="currencyModal" class="modal fade" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" aria-labelledby="currencyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content shadow">
+          <div class="modal-header">
+              <h5 class="modal-title">Currency Converter</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="form-floating mb-3">
+                      <input id="fromAmount" type="number" class="form-control" value="1" min="1" step="1">
+                      <label for="fromAmount">Amount (Base Currency)</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                      <select id="exchangeRate" class="form-select"></select>
+                      <label for="exchangeRate">Convert to</label>
+                  </div>
+                  <div class="form-floating">
+                      <input id="toAmount" type="text" class="form-control" disabled>
+                      <label for="toAmount">Result</label>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- End of modal 3 -->
+
+<!-- Modal 4 - (Weather) -->
+<div id="weatherModal" class="modal fade" tabindex="-1" data-bs-backdrop="false" aria-labelledby="weatherModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="weatherModalLabel">Weather Information</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="row mb-3 justify-content-center">
+          <div class="col-5 border p-2 mx-1">
+            <h6>TODAY</h6>
+            <p id="todayConditions" class="mb-1"></p>
+            <img id="todayIcon" class="img-fluid mb-2" src="" alt="Weather icon">
+            <p><span id="todayMaxTemp"></span>°C</p>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-5 border p-2 mx-1">
+            <h6>TOMORROW</h6>
+            <p id="day1Date" class="mb-1"></p>
+            <img id="day1Icon" class="img-fluid mb-2" src="" alt="Weather icon">
+            <p><span id="day1MaxTemp"></span>°C</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <p class="small text-muted mb-0" style="text-align: right; flex-grow: 1;">Powered by <a href="https://www.weatherapi.com/" target="_blank">WeatherAPI.com</a></p>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of modal 4 -->
+
+<!--  Modal 5 - (News) -->
+<div class="modal fade" id="newsModal" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" aria-labelledby="newsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newsModalLabel">Latest News</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="newsContent"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of modal 5 -->
+
+<!-- Scripts -->
+<!-- numeral.js -->
+<script src="node_modules/numeral/min/numeral.min.js"></script>
+<!-- jQuery -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Leaflet JS -->
+<script src="node_modules/leaflet/dist/leaflet.js"></script>
+<!-- EasyButton JS -->
+<script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
+<!-- Leaflet MarkerCluster JS -->
+<script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<!-- Turf.js -->
+<script src="node_modules/@turf/turf/turf.min.js"></script>
+<script type="application/javascript" src="/project1/script.js"></script>
+<!-- Scripts -->
+</body>
+</html>
