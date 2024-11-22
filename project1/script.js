@@ -295,12 +295,12 @@ L.easyButton('<i class="fa-solid fa-info"></i>', function(btn, map) {
     }).addTo(map);
 //End of modal 2 - Country Wikipedia (Small article + Link)
 
-//Modal 3 - Currency Converter
-    L.easyButton('<i class="fa-solid fa-coins"></i>', function () {
-        populateCurrencyDropdown();
-        $('#currencyModal').modal('show');
-    }).addTo(map);
-    function populateCurrencyDropdown() {
+// Modal 3 - Currency Converter
+L.easyButton('<i class="fa-solid fa-coins"></i>', function () {
+    populateCurrencyDropdown();
+    $('#currencyModal').modal('show');
+}).addTo(map);
+function populateCurrencyDropdown() {
     fetch('get_all_currencies.php')
         .then(response => response.json())
         .then(response => {
@@ -318,8 +318,8 @@ L.easyButton('<i class="fa-solid fa-info"></i>', function(btn, map) {
             }
         })
         .catch(error => console.error('Error fetching currencies:', error));
-    }
-    function performCurrencyConversion() {
+}
+function performCurrencyConversion() {
     const targetCurrency = document.getElementById('exchangeRate').value;
     const amount = document.getElementById('fromAmount').value;
     if (!targetCurrency) {
@@ -339,34 +339,37 @@ L.easyButton('<i class="fa-solid fa-info"></i>', function(btn, map) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            base_currency: baseCurrency, 
+            base_currency: baseCurrency,
             target_currency: targetCurrency,
             amount: amount
         })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const convertedAmount = numeral(data.converted_amount).format('0,0.00');
-            document.getElementById('toAmount').value = convertedAmount;            
-        } else {
-            const errorMessage = data.message || 'Error performing conversion.';
-            document.getElementById('toAmount').value = 'Conversion failed.';
-            alert(errorMessage);
-        }
-    })
-    .catch(error => {
-        console.error('Error during conversion:', error);
-        alert('An error occurred while processing the conversion.');
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const convertedAmount = numeral(data.converted_amount).format('0,0');
+                document.getElementById('toAmount').value = convertedAmount;
+            } else {
+                const errorMessage = data.message || 'Error performing conversion.';
+                document.getElementById('toAmount').value = 'Conversion failed.';
+                alert(errorMessage);
+            }
+        })
+        .catch(error => {
+            console.error('Error during conversion:', error);
+            alert('An error occurred while processing the conversion.');
+        });
 }
 document.getElementById('fromAmount').addEventListener('input', performCurrencyConversion);
 document.getElementById('exchangeRate').addEventListener('change', performCurrencyConversion);
-//End of modal 3 - Currency Converter
+$('#currencyModal').on('show.bs.modal', performCurrencyConversion);
+// End of Modal 3 - Currency Converter
 
 
-//Modal 4 - Country Capital Weather
-L.easyButton('<i class="fa-solid fa-umbrella"></i>', function() {
+
+
+// Modal 4 - Country Capital Weather
+L.easyButton('<i class="fa-solid fa-umbrella"></i>', function () {
     var selectedCountryCode = document.getElementById('countrySelect').value;
     if (!selectedCountryCode) {
         alert('Please select a country first.');
@@ -376,29 +379,29 @@ L.easyButton('<i class="fa-solid fa-umbrella"></i>', function() {
         url: 'get_weather.php',
         type: 'POST',
         data: { country_code: selectedCountryCode },
-        success: function(response) {
+        success: function (response) {
             var data = JSON.parse(response);
             if (data.success) {
                 $('#weatherModalLabel').text(`Weather in ${data.city}, ${data.country}`);
                 $('#todayConditions').text(data.today.description);
                 $('#todayIcon').attr('src', `https:${data.today.icon}`);
-                $('#todayMaxTemp').text(data.today.temp);
+                $('#todayMaxTemp').text(Math.round(data.today.temp)); 
                 $('#day1Date').text('Tomorrow');
                 $('#day1Icon').attr('src', `https:${data.tomorrow.icon}`);
-                $('#day1MaxTemp').text(data.tomorrow.temp);
+                $('#day1MaxTemp').text(Math.round(data.tomorrow.temp)); 
                 $('#weatherModal').modal('show');
             } else {
                 $('#weatherInfo').html(`<p>Error: ${data.message}</p>`);
                 $('#weatherModal').modal('show');
             }
         },
-        error: function() {
+        error: function () {
             $('#weatherInfo').html('<p>Error fetching weather data.</p>');
             $('#weatherModal').modal('show');
         }
     });
 }).addTo(map);
-//End of modal 4 - Country Capital Weather
+// End of Modal 4 - Country Capital Weather
 
 //Modal 5 - Country News
 L.easyButton('<i class="fa-solid fa-newspaper"></i>', function () {
