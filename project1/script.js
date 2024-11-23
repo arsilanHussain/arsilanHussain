@@ -296,6 +296,7 @@ L.easyButton('<i class="fa-solid fa-info"></i>', function(btn, map) {
 //End of modal 2 - Country Wikipedia (Small article + Link)
 
 // Modal 3 - Currency Converter
+let selectedTargetCurrency = null;
 L.easyButton('<i class="fa-solid fa-coins"></i>', function () {
     populateCurrencyDropdown();
     $('#currencyModal').modal('show');
@@ -306,11 +307,14 @@ function populateCurrencyDropdown() {
         .then(response => {
             if (response.success && response.currencies) {
                 const dropdown = document.getElementById('exchangeRate');
-                dropdown.innerHTML = '<option value="" disabled selected>Select Currency...</option>';
+                dropdown.innerHTML = '<option value="" disabled>Select Currency...</option>';
                 for (const [code, name] of Object.entries(response.currencies)) {
                     const option = document.createElement('option');
                     option.value = code;
                     option.textContent = `${name} (${code})`;
+                    if (code === selectedTargetCurrency) {
+                        option.selected = true;
+                    }
                     dropdown.appendChild(option);
                 }
             } else {
@@ -320,8 +324,12 @@ function populateCurrencyDropdown() {
         .catch(error => console.error('Error fetching currencies:', error));
 }
 function performCurrencyConversion() {
-    const targetCurrency = document.getElementById('exchangeRate').value;
+    const targetCurrencyDropdown = document.getElementById('exchangeRate');
+    const targetCurrency = targetCurrencyDropdown.value || selectedTargetCurrency;
     const amount = document.getElementById('fromAmount').value;
+    if (targetCurrencyDropdown.value) {
+        selectedTargetCurrency = targetCurrencyDropdown.value;
+    }
     if (!targetCurrency) {
         document.getElementById('toAmount').value = '';
         return;
