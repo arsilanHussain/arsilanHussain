@@ -1,7 +1,4 @@
 <?php
-if (!headers_sent()) {
-    ob_start();
-<?php
 
 $cd_host = "127.0.0.1";
 $cd_port = 3306;
