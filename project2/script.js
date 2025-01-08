@@ -422,115 +422,125 @@ $(document).ready(function()
 
    // Load Table Date
    // Load Personnel Data
-   const loadPersonnelData = () =>
-   {
-      loadTableData("libs/php/getAllPersonnel.php", $("#personnelTableBody"), (person) =>
-      {
-         const row = document.createElement("tr");
-         row.setAttribute("data-department-id", person.departmentID);
-         row.setAttribute("data-location-id", person.locationID);
-         row.setAttribute("data-id", person.id);
-         const nameCell = document.createElement("td");
-         nameCell.textContent = `${person.firstName || "N/A"} ${person.lastName || "N/A"}`;
-         row.appendChild(nameCell);
-         const emailCell = document.createElement("td");
-         emailCell.textContent = person.email || "N/A";
-         row.appendChild(emailCell);
-         const departmentCell = document.createElement("td");
-         departmentCell.textContent = person.department || "N/A";
-         row.appendChild(departmentCell);
-         const locationCell = document.createElement("td");
-         locationCell.textContent = person.location || "N/A";
-         row.appendChild(locationCell);
-         const actionsCell = document.createElement("td");
-         actionsCell.classList.add("text-end");
-         const editButton = document.createElement("button");
-         editButton.classList.add("btn", "btn-primary", "btn-sm", "edit-btn", "me-2");
-         editButton.setAttribute("data-bs-toggle", "modal");
-         editButton.setAttribute("data-bs-target", "#editPersonnelModal");
-         editButton.setAttribute("data-id", person.id);
-         editButton.setAttribute("data-type", "personnel");
-         editButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
-         actionsCell.appendChild(editButton);
-         const deleteButton = document.createElement("button");
-         deleteButton.classList.add("btn", "btn-primary", "btn-sm", "delete-btn");
-         deleteButton.setAttribute("data-bs-toggle", "modal");
-         deleteButton.setAttribute("data-bs-target", "#deletePersonnelModal");
-         deleteButton.setAttribute("data-id", person.id);
-         deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-         actionsCell.appendChild(deleteButton);
-         row.appendChild(actionsCell);
-         return row;
-      });
-   };
-   // Load Department Data
-   const loadDepartmentData = () =>
-   {
-      loadTableData("libs/php/getAllDepartments.php", $("#departmentTableBody"), (dept) =>
-      {
-         const row = document.createElement("tr");
-         row.setAttribute("data-department-id", dept.departmentID);
-         row.setAttribute("data-location-id", dept.locationID);
-         row.setAttribute("data-id", dept.departmentID);
-         const nameCell = document.createElement("td");
-         nameCell.textContent = dept.departmentName || "N/A";
-         row.appendChild(nameCell);
-         const locationCell = document.createElement("td");
-         locationCell.textContent = dept.locationName || "N/A";
-         row.appendChild(locationCell);
-         const actionsCell = document.createElement("td");
-         actionsCell.classList.add("text-end");
-         const editButton = document.createElement("button");
-         editButton.classList.add("btn", "btn-primary", "btn-sm", "edit-btn", "me-2");
-         editButton.setAttribute("data-bs-toggle", "modal");
-         editButton.setAttribute("data-bs-target", "#editDepartmentModal");
-         editButton.setAttribute("data-id", dept.departmentID);
-         editButton.setAttribute("data-type", "department");
-         editButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
-         actionsCell.appendChild(editButton);
-         const deleteButton = document.createElement("button");
-         deleteButton.classList.add("btn", "btn-primary", "btn-sm", "delete-btn");
-         deleteButton.setAttribute("data-bs-toggle", "modal");
-         deleteButton.setAttribute("data-bs-target", "#deleteDepartmentModal");
-         deleteButton.setAttribute("data-id", dept.departmentID);
-         deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-         actionsCell.appendChild(deleteButton);
-         row.appendChild(actionsCell);
-         return row;
-      });
-   };
-   // Load Location Data
-   const loadLocationData = () =>
-   {
-      loadTableData("libs/php/getAllLocations.php", $("#locationTableBody"), (loc) =>
-      {
-         const row = document.createElement("tr");
-         row.setAttribute("data-location-id", loc.id);
-         row.setAttribute("data-id", loc.id);
-         const nameCell = document.createElement("td");
-         nameCell.textContent = loc.name || "N/A";
-         row.appendChild(nameCell);
-         const actionsCell = document.createElement("td");
-         actionsCell.classList.add("text-end");
-         const editButton = document.createElement("button");
-         editButton.classList.add("btn", "btn-primary", "btn-sm", "edit-btn", "me-2");
-         editButton.setAttribute("data-bs-toggle", "modal");
-         editButton.setAttribute("data-bs-target", "#editLocationModal");
-         editButton.setAttribute("data-id", loc.id);
-         editButton.setAttribute("data-type", "location");
-         editButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
-         actionsCell.appendChild(editButton);
-         const deleteButton = document.createElement("button");
-         deleteButton.classList.add("btn", "btn-primary", "btn-sm", "delete-btn");
-         deleteButton.setAttribute("data-bs-toggle", "modal");
-         deleteButton.setAttribute("data-bs-target", "#deleteLocationModal");
-         deleteButton.setAttribute("data-id", loc.id);
-         deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-         actionsCell.appendChild(deleteButton);
-         row.appendChild(actionsCell);
-         return row;
-      });
-   };
+const loadPersonnelData = () => {
+   loadTableData("libs/php/getAllPersonnel.php", $("#personnelTableBody"), (person) => {
+       const row = document.createElement("tr");
+       row.setAttribute("data-department-id", person.departmentID);
+       row.setAttribute("data-location-id", person.locationID);
+       row.setAttribute("data-id", person.id);
+
+       const nameCell = document.createElement("td");
+       nameCell.textContent = `${person.firstName || "N/A"} ${person.lastName || "N/A"}`;
+       row.appendChild(nameCell);
+
+       const emailCell = document.createElement("td");
+       emailCell.textContent = person.email || "N/A";
+       row.appendChild(emailCell);
+
+       const departmentCell = document.createElement("td");
+       departmentCell.textContent = person.department || "N/A";
+       row.appendChild(departmentCell);
+
+       const locationCell = document.createElement("td");
+       locationCell.textContent = person.location || "N/A";
+       row.appendChild(locationCell);
+
+       const actionsCell = document.createElement("td");
+       actionsCell.classList.add("text-end");
+
+       const editButton = document.createElement("button");
+       editButton.classList.add("btn", "btn-primary", "btn-sm", "edit-btn", "me-2");
+       editButton.setAttribute("data-bs-toggle", "modal");
+       editButton.setAttribute("data-bs-target", "#editPersonnelModal");
+       editButton.setAttribute("data-id", person.id);
+       editButton.setAttribute("data-type", "personnel");
+       editButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+       actionsCell.appendChild(editButton);
+
+       const deleteButton = document.createElement("button");
+       deleteButton.classList.add("btn", "btn-primary", "btn-sm", "delete-btn");
+       deleteButton.setAttribute("data-id", person.id); 
+       deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+       actionsCell.appendChild(deleteButton);
+
+       row.appendChild(actionsCell);
+       return row;
+   });
+};
+
+// Load Department Data
+const loadDepartmentData = () => {
+   loadTableData("libs/php/getAllDepartments.php", $("#departmentTableBody"), (dept) => {
+       const row = document.createElement("tr");
+       row.setAttribute("data-department-id", dept.departmentID);
+       row.setAttribute("data-location-id", dept.locationID);
+       row.setAttribute("data-id", dept.departmentID);
+
+       const nameCell = document.createElement("td");
+       nameCell.textContent = dept.departmentName || "N/A";
+       row.appendChild(nameCell);
+
+       const locationCell = document.createElement("td");
+       locationCell.textContent = dept.locationName || "N/A";
+       row.appendChild(locationCell);
+
+       const actionsCell = document.createElement("td");
+       actionsCell.classList.add("text-end");
+
+       const editButton = document.createElement("button");
+       editButton.classList.add("btn", "btn-primary", "btn-sm", "edit-btn", "me-2");
+       editButton.setAttribute("data-bs-toggle", "modal");
+       editButton.setAttribute("data-bs-target", "#editDepartmentModal");
+       editButton.setAttribute("data-id", dept.departmentID);
+       editButton.setAttribute("data-type", "department");
+       editButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+       actionsCell.appendChild(editButton);
+
+       const deleteButton = document.createElement("button");
+       deleteButton.classList.add("btn", "btn-primary", "btn-sm", "delete-btn");
+       deleteButton.setAttribute("data-id", dept.departmentID); 
+       deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+       actionsCell.appendChild(deleteButton);
+
+       row.appendChild(actionsCell);
+       return row;
+   });
+};
+
+// Load Location Data
+const loadLocationData = () => {
+   loadTableData("libs/php/getAllLocations.php", $("#locationTableBody"), (loc) => {
+       const row = document.createElement("tr");
+       row.setAttribute("data-location-id", loc.id);
+       row.setAttribute("data-id", loc.id);
+
+       const nameCell = document.createElement("td");
+       nameCell.textContent = loc.name || "N/A";
+       row.appendChild(nameCell);
+
+       const actionsCell = document.createElement("td");
+       actionsCell.classList.add("text-end");
+
+       const editButton = document.createElement("button");
+       editButton.classList.add("btn", "btn-primary", "btn-sm", "edit-btn", "me-2");
+       editButton.setAttribute("data-bs-toggle", "modal");
+       editButton.setAttribute("data-bs-target", "#editLocationModal");
+       editButton.setAttribute("data-id", loc.id);
+       editButton.setAttribute("data-type", "location");
+       editButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+       actionsCell.appendChild(editButton);
+
+       const deleteButton = document.createElement("button");
+       deleteButton.classList.add("btn", "btn-primary", "btn-sm", "delete-btn");
+       deleteButton.setAttribute("data-id", loc.id); 
+       deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+       actionsCell.appendChild(deleteButton);
+
+       row.appendChild(actionsCell);
+       return row;
+   });
+};
+
    // Load Table Date
 
    // Edit Modal
@@ -681,148 +691,203 @@ $(document).ready(function()
    // Reload data
 
    // Delete modal
-   $(document).on("click", ".delete-btn", function()
-   {
-      const id = $(this).data("id");
-      const activeTab = $(".tab-pane.show.active").attr("id");
-      let modalId, fetchDetailsUrl, nameSelector, idSelector, reloadType;
-      switch (activeTab)
-      {
-         case "personnel-tab-pane":
-            modalId = "#deletePersonnelModal";
-            fetchDetailsUrl = "libs/php/getPersonnelById.php";
-            nameSelector = "#employeeName";
-            idSelector = "#deletePersonnelID";
-            reloadType = "personnel";
-            break;
-         case "departments-tab-pane":
-            modalId = "#deleteDepartmentModal";
-            fetchDetailsUrl = "libs/php/getDepartmentById.php";
-            nameSelector = "#departmentName";
-            idSelector = "#deleteDepartmentID";
-            reloadType = "department";
-            break;
-         case "locations-tab-pane":
-            modalId = "#deleteLocationModal";
-            fetchDetailsUrl = "libs/php/getLocationById.php";
-            nameSelector = "#locationName";
-            idSelector = "#deleteLocationID";
-            reloadType = "location";
-            break;
-         default:
-            console.error("Unsupported tab for delete operation.");
-            return;
-      }
-      $.ajax(
-      {
-         url: fetchDetailsUrl,
-         type: "GET",
-         dataType: "json",
-         data:
-         {
-            id
-         },
-         success: function(result)
-         {
-            if (result.status.code === 200 && result.data)
-            {
-               let name;
-               if (activeTab === "personnel-tab-pane")
-               {
-                  name = `${result.data.firstName} ${result.data.lastName}`;
-               }
-               else if (activeTab === "departments-tab-pane")
-               {
-                  name = result.data.departmentName;
-               }
-               else if (activeTab === "locations-tab-pane")
-               {
-                  name = result.data.name;
-               }
-               const modalElement = $(modalId);
-               const nameElement = modalElement.find(nameSelector);
-               $(idSelector).val(id);
-               nameElement.html(`<b>${name || "Unknown Name"}</b>`);
-               modalElement.modal("show");
-            }
-            else
-            {
-               alert("Failed to fetch details. Please try again.");
-            }
-         },
-         error: function()
-         {
-            alert("Error occurred while fetching details.");
-         },
+   $(document).ready(function () {
+      $(document).on("click", ".delete-btn", function () {
+          const id = $(this).data("id");
+          const activeTab = $(".tab-pane.show.active").attr("id");
+  
+          const settings = getDeleteSettings(activeTab);
+  
+          if (!settings) {
+              console.error(`Unsupported tab for delete operation. Active Tab: ${activeTab}`);
+              return;
+          }
+  
+          const { checkDependenciesUrl, fetchDetailsUrl, deleteModal, cantDeleteModal, nameField, countField, reloadType } = settings;
+  
+          if (checkDependenciesUrl) {
+              checkDependencies(
+                  checkDependenciesUrl,
+                  id,
+                  cantDeleteModal,
+                  nameField,
+                  countField,
+                  () => fetchDetails(fetchDetailsUrl, id, deleteModal, reloadType)
+              );
+          } else {
+              fetchDetails(fetchDetailsUrl, id, deleteModal, reloadType);
+          }
       });
-   });
-   $(document).on("submit", ".delete-form", function(e)
-   {
-      e.preventDefault();
-      const form = $(this);
-      const apiUrl = form.data("api-url");
-      const id = form.find("input[type=hidden]").val();
-      const reloadFunctionName = form.data("reload-function");
-      let reloadType = "";
-      if (reloadFunctionName === "loadPersonnelData")
-      {
-         reloadType = "personnel";
-      }
-      else if (reloadFunctionName === "loadDepartmentData")
-      {
-         reloadType = "department";
-      }
-      else if (reloadFunctionName === "loadLocationData")
-      {
-         reloadType = "location";
-      }
-      else
-      {
-         return;
-      }
-      $.ajax(
-      {
-         url: apiUrl,
-         type: "POST",
-         dataType: "json",
-         contentType: "application/json",
-         data: JSON.stringify(
-         {
-            id
-         }),
-         success: function(result)
-         {
-            if (result.status.code === 200)
-            {
-               $(".modal").modal("hide");
-               reloadData(reloadType);
-            }
-            else
-            {
-               alert(`Error deleting entry: ${result.status.description}`);
-            }
-         },
+  
+      $(document).on("submit", ".delete-form", function (e) {
+          e.preventDefault();
+  
+          const form = $(this);
+          const apiUrl = form.data("api-url");
+          const id = form.find("input[type=hidden]").val();
+          const reloadFunctionName = form.data("reload-function");
+  
+          const reloadMap = {
+              loadPersonnelData: "personnel",
+              loadDepartmentData: "department",
+              loadLocationData: "location",
+          };
+  
+          const reloadType = reloadMap[reloadFunctionName];
+  
+          if (!reloadType) {
+              console.error(`Unknown reload function: ${reloadFunctionName}`);
+              return;
+          }
+  
+          $.ajax({
+              url: apiUrl,
+              type: "POST",
+              dataType: "json",
+              contentType: "application/json",
+              data: JSON.stringify({ id }),
+              success: function (response) {
+                  if (response.status.code === 200) {
+                      $(".modal").modal("hide");
+                      reloadData(reloadType);
+                  } else {
+                      alert(`Error deleting entry: ${response.status.description}`);
+                  }
+              },
+              error: function () {
+                  alert("Error occurred while deleting. Please try again.");
+              },
+          });
       });
-   });
-   $("#deletePersonnelModal").on("show.bs.modal", function()
-   {
-      const personnelID = $("#deletePersonnelID").val();
-   });
-   $("#deleteDepartmentModal").on("show.bs.modal", function()
-   {
-      const departmentID = $("#deleteDepartmentID").val();
-   });
-   $("#deleteLocationModal").on("show.bs.modal", function()
-   {
-      const locationID = $("#deleteLocationID").val();
-   });
-   $(".modal").on("hidden.bs.modal", function()
-   {
-      $(this).find("input[type=hidden]").val("");
-      $(this).find("span").html("");
-   });
-   // Delete modal
-
+  
+      $("#deletePersonnelModal").on("show.bs.modal", function () {
+          const id = $(this).find("input[type=hidden]").val();
+          if (!id) console.error("Missing Personnel ID during deletion.");
+      });
+  
+      $("#deleteDepartmentModal").on("show.bs.modal", function () {
+          const id = $(this).find("input[type=hidden]").val();
+          if (!id) console.error("Missing Department ID during deletion.");
+      });
+  
+      $("#deleteLocationModal").on("show.bs.modal", function () {
+          const id = $(this).find("input[type=hidden]").val();
+          if (!id) console.error("Missing Location ID during deletion.");
+      });
+  
+      $("#cantDeleteDepartmentModal").on("show.bs.modal", function () {
+          const deptName = $("#cantDeleteDeptName").text();
+          const personnelCount = $("#personnelCount").text();
+          if (!deptName || !personnelCount) {
+              console.error("Missing dependency details for Cannot Delete Department modal.");
+          }
+      });
+  
+      $("#cantDeleteLocationModal").on("show.bs.modal", function () {
+          const locName = $("#cantDeleteLocationName").text();
+          const departmentCount = $("#departmentCount").text();
+          if (!locName || !departmentCount) {
+              console.error("Missing dependency details for Cannot Delete Location modal.");
+          }
+      });
+  
+      $("#areYouSureDeleteDepartmentModal").on("show.bs.modal", function () {
+          const deptName = $("#areYouSureDeptName").text();
+          if (!deptName) console.error("Missing Department Name in Are You Sure modal.");
+      });
+  
+      $("#areYouSurePersonnelModal").on("show.bs.modal", function () {
+          const personnelName = $("#areYouSurePersonnelName").text();
+          if (!personnelName) console.error("Missing Personnel Name in Are You Sure modal.");
+      });
+  
+      $(".modal").on("hidden.bs.modal", function () {
+          $(this).find("input[type=hidden]").val("");
+          $(this).find("span").html("");
+      });
+  
+      function getDeleteSettings(activeTab) {
+          switch (activeTab) {
+              case "departments-tab-pane":
+                  return {
+                      checkDependenciesUrl: "libs/php/checkDepartmentUse.php",
+                      fetchDetailsUrl: "libs/php/getDepartmentById.php",
+                      deleteModal: "#deleteDepartmentModal",
+                      cantDeleteModal: "#cantDeleteDepartmentModal",
+                      nameField: "#cantDeleteDeptName",
+                      countField: "#personnelCount",
+                      reloadType: "department",
+                  };
+              case "locations-tab-pane":
+                  return {
+                      checkDependenciesUrl: "libs/php/checkLocationUse.php",
+                      fetchDetailsUrl: "libs/php/getLocationById.php",
+                      deleteModal: "#deleteLocationModal",
+                      cantDeleteModal: "#cantDeleteLocationModal",
+                      nameField: "#cantDeleteLocationName",
+                      countField: "#departmentCount",
+                      reloadType: "location",
+                  };
+              case "personnel-tab-pane":
+                  return {
+                      fetchDetailsUrl: "libs/php/getPersonnelById.php",
+                      deleteModal: "#deletePersonnelModal",
+                      reloadType: "personnel",
+                  };
+              default:
+                  return null;
+          }
+      }
+  
+      function checkDependencies(url, id, cantDeleteModal, nameField, countField, onNoDependencies) {
+          $.ajax({
+              url: url,
+              type: "GET",
+              data: { id },
+              success: function (response) {
+                  if (response.status.code === 200) {
+                      const data = response.data;
+                      const hasDependencies = data.personnelCount > 0 || data.departmentCount > 0;
+  
+                      if (hasDependencies) {
+                          $(nameField).text(data.departmentName || data.locationName);
+                          $(countField).text(data.personnelCount || data.departmentCount);
+                          $(cantDeleteModal).modal("show");
+                          return;
+                      }
+                  }
+                  onNoDependencies();
+              },
+              error: function () {
+                  alert("Error checking dependencies. Please try again.");
+              },
+          });
+      }
+  
+      function fetchDetails(url, id, deleteModal, reloadType) {
+          $.ajax({
+              url: url,
+              type: "GET",
+              data: { id },
+              success: function (response) {
+                  if (response.status.code === 200) {
+                      const data = response.data;
+                      const name = data.firstName
+                          ? `${data.firstName} ${data.lastName}`
+                          : data.departmentName || data.name || "Unknown Name";
+  
+                      $(deleteModal).find(".modal-body span").html(`<b>${name}</b>`);
+                      $(deleteModal).find("input[type=hidden]").val(id);
+                      $(deleteModal).modal("show");
+                  }
+              },
+              error: function () {
+                  alert("Error fetching details. Please try again.");
+              },
+          });
+      }
+  });
+     // Delete modal
    loadPersonnelData();
    loadDepartmentData();
    loadLocationData();
