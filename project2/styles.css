@@ -1,6 +1,5 @@
 html,
-body
-{
+body {
    background-color: #f9f6ee;
    margin: 5px 0px 5px 2px;
    padding: 5px 0px 5px 2px;
@@ -10,8 +9,7 @@ body
    flex-direction: column;
 }
 
-section
-{
+section {
    flex: 1;
    display: flex;
    flex-flow: column;
@@ -19,41 +17,39 @@ section
    overflow-y: auto;
 }
 
-.tab-content
-{
+.tab-content {
    flex: 1;
    overflow-y: scroll;
 }
 
-tr
-{
+table, section, .tab-content, .modal-content {
+   max-width: 100%;
+   overflow-x: hidden;
+}
+
+tr {
    cursor: default;
 }
 
-.myBtn
-{
+.myBtn {
    width: 70px;
 }
 
-.footer
-{
+.footer {
    background-color: #f9f6ee;
    text-align: center;
    margin-top: auto;
 }
 
-.footer p
-{
+.footer p {
    margin: 10px 0;
 }
 
-.nav
-{
+.nav {
    --bs-nav-link-padding-y: 0rem;
 }
 
-#preloader
-{
+#preloader {
    position: fixed;
    top: 0;
    left: 0;
@@ -64,8 +60,7 @@ tr
    background: #fff;
 }
 
-#preloader:before
-{
+#preloader:before {
    content: "";
    position: fixed;
    top: calc(50% - 30px);
@@ -79,45 +74,35 @@ tr
    animation: animate-preloader 1s linear infinite;
 }
 
-@-webkit-keyframes animate-preloader
-{
-   0%
-   {
+@-webkit-keyframes animate-preloader {
+   0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
    }
-
-   100%
-   {
+   100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
    }
 }
 
-@keyframes animate-preloader
-{
-   0%
-   {
+@keyframes animate-preloader {
+   0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
    }
-
-   100%
-   {
+   100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
    }
 }
 
-.modal-dialog-centered
-{
+.modal-dialog-centered {
    display: flex;
    align-items: center;
    justify-content: center;
    min-height: 100vh;
 }
 
-.modal-content
-{
+.modal-content {
    margin: auto;
 }
