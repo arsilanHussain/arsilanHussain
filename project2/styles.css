@@ -45,9 +45,7 @@ tr {
    margin: 10px 0;
 }
 
-.nav {
-   --bs-nav-link-padding-y: 0rem;
-}
+
 
 #preloader {
    position: fixed;
